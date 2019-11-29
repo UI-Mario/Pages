@@ -1,29 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>float两列布局:margin-left</title>
-	<style type="text/css">
-		html,
-		body{
-			padding: 0;
-			margin: 0;
-			width: 100%;
-		}
-		.left{
-			float: left;
-			height: 100px;
-			width: 100px;
-			background-color: green;
-		}
-		.right{
-			height: 100px;
-			margin-left: 100px;
-			background-color: yellow;
-		}
-	</style>
-</head>
-<body>
-	<div class="left"></div>
-	<div class="right"></div>
-</body>
+  <head>
+    <title>float两列布局:margin-left</title>
+    <style type="text/css">
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+      }
+      .left-2 {
+        float: left;
+        margin-bottom: 10px;
+        height: 100px;
+        width: 100px;
+        background-color: green;
+      }
+      .right-2 {
+        height: 100px;
+        margin-left: 100px;
+        margin-bottom: 10px;
+        background-color: yellow;
+      }
+      .left-3 {
+        float: left;
+        height: 100px;
+        width: 100px;
+        background-color: green;
+      }
+      .right-3 {
+        height: 100px;
+        margin-left: 100px;
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="left-2"></div>
+    <div class="right-2"></div>
+    <div class="left-3"></div>
+    <div class="right-3"></div>
+  </body>
 </html>
