@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>float两列布局:calc(100%-100px)</title>
+	<style type="text/css">
+		html,
+		body{
+			padding: 0;
+			margin: 0;
+			width: 100%;
+		}
+		.left{
+			float: left;
+			height: 100px;
+			width: 100px;
+			background-color: green;
+		}
+		.right{
+			height: 100px;
+			float: left;
+			width: calc(100% - 100px);
+			background-color: yellow;
+		}
+	</style>
+</head>
+<body>
+	<div class="left"></div>
+	<div class="right"></div>
+</body>
+</html>
