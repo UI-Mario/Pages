@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>temp</title>
+    <meta charset="utf-8" />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      header {
+        position: fixed;
+        top: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100px;
+        background-color: #32394a;
+      }
+
+      .left,
+      .right {
+        display: flex;
+        align-items: center;
+      }
+
+      header .left {
+        float: left;
+        height: 100%;
+        width: 40%;
+      }
+      header .right {
+        float: right;
+        height: 100%;
+        width: 7%;
+      }
+
+      header p {
+        color: white;
+        font-size: 20px;
+      }
+
+      header img {
+        margin: 0 20px 0 20px;
+        width: 35px;
+        height: 35px;
+      }
+
+      .swiper {
+        width: 100%;
+        position: relative;
+        margin-top: 100px;
+      }
+
+      .swiper img {
+        width: 100%;
+      }
+      .circle {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 80px;
+        height: 30px;
+      }
+
+      .cir1 {
+        float: right;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        margin: 0 4px;
+        background-color: white;
+      }
+
+      nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-auto-rows: 100px 100px;
+        justify-items: center;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+
+        width: auto;
+        height: 220px;
+      }
+
+      nav a {
+        padding: 5px;
+
+        width: 200px;
+
+        font-size: 35px;
+        color: black;
+
+        text-align: center;
+        text-decoration: none;
+        border: #f0f0f0 1px solid;
+        border-radius: 30px;
+      }
+
+      nav a:hover {
+        background-color: #ff2d50;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="left">
+        <img
+          src="https://ftp.bmp.ovh/imgs/2019/12/bd08b24294607a2e.png"
+          alt="back-icon"
+        />
+        <p>实战课程</p>
+      </div>
+      <div class="right">
+        <img
+          src="https://ftp.bmp.ovh/imgs/2019/12/64968e67ef4e6b8a.png"
+          alt="Shopping-cart-icon"
+        />
+      </div>
+    </header>
+    <div class="swiper">
+      <img src="https://ftp.bmp.ovh/imgs/2019/12/25538c9d9fce2e2a.png" />
+      <div class="circle">
+        <div class="cir1"></div>
+        <div class="cir1"></div>
+        <div class="cir1"></div>
+      </div>
+    </div>
+    <nav>
+      <a href="#">全部</a>
+      <a href="#">前端开发</a>
+      <a href="#">后端开发</a>
+      <a href="#">移动开发</a>
+      <a href="#">数据库</a>
+      <a href="#">运维&测试</a>
+    </nav>
+  </body>
+</html>
