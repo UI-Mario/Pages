@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>dom2</title>
+    <style>
+      .add {
+        float: left;
+      }
+      .reduce {
+        float: right;
+      }
+    </style>
+  </head>
+
+  <body>
+    <table border="1" cellspacing="0">
+      <tr>
+        <th>选择</th>
+        <th>商品名称</th>
+        <th>商品单价</th>
+        <th>商品数量</th>
+        <th>总价</th>
+      </tr>
+      <tr id="tfoot">
+        <td><input type="checkbox" id="chooseAll" checked="true" />全选</td>
+        <td colspan="4">
+          <span style="float: right;"
+            >共计<span id="totalNum"></span>件商品,
+            <span id="totalPrice"></span>$</span
+          >
+        </td>
+      </tr>
+    </table>
+  </body>
+  <script type="text/javascript">
+    var data = [
+      {
+        id: 1,
+        name: "英雄牌 钢笔",
+        count: 1,
+        price: 69,
+        checked: false
+      },
+      {
+        id: 2,
+        name: "晨光牌 铅字笔",
+        count: 2,
+        price: 5.5,
+        checked: true
+      },
+      {
+        id: 3,
+        name: "晨光牌 铅笔",
+        count: 1,
+        price: 2,
+        checked: false
+      },
+      {
+        id: 4,
+        name: "狗熊牌 橡皮擦",
+        count: 1,
+        price: 1,
+        checked: false
+      },
+      {
+        id: 5,
+        name: "瑞士牌 双肩书包",
+        count: 1,
+        price: 199,
+        checked: true
+      },
+      {
+        id: 6,
+        name: "晨光牌 作业本",
+        count: 5,
+        price: 2.5,
+        checked: false
+      }
+    ];
+
+    // 创建添加行的样式
+    const createRows = id => {
+      // 搭起表单框架
+      const row = document.createElement("tr");
+      row.setAttribute("id", id);
+      const checkbox = document.createElement("input");
+      checkbox.setAttribute("type", "checkbox");
+      checkbox.setAttribute("checked", "true");
+      const proName = document.createElement("td");
+      const proPrice = document.createElement("td");
+      const proNum = document.createElement("td");
+      const tr_price = document.createElement("td");
+
+      checkbox.setAttribute("id", "checkbox" + id);
+      proName.setAttribute("id", "proName" + id);
+      proPrice.setAttribute("id", "proPrice" + id);
+      proNum.setAttribute("id", "proNum" + id);
+      tr_price.setAttribute("id", "tr_price" + id);
+
+      row.appendChild(checkbox);
+      row.appendChild(proName);
+      row.appendChild(proPrice);
+      row.appendChild(proNum);
+      row.appendChild(tr_price);
+
+      var table = document.querySelector("table");
+      table.appendChild(row);
+
+      const tfoot = document.getElementById("tfoot");
+      table.append(tfoot);
+    };
+
+    // 给每行正式加入数据
+    const renderData = data => {
+      // 把每行写进去
+      for (var i = 0; i < data.length; i++) {
+        createRows(data[i].id);
+      }
+      // 读入每行数据
+      for (var i = 0; i < data.length; i++) {
+        document.getElementById("proName" + data[i].id).innerHTML =
+          data[i].name;
+        document.getElementById("proPrice" + data[i].id).innerHTML =
+          data[i].price;
+        // document.getElementById("proNum" + data[i].id).innerHTML =
+        data[i].count;
+        document.getElementById("tr_price" + data[i].id).innerHTML =
+          data[i].price * data[i].count;
+      }
+    };
+
+    // 计算底部总数及总价
+    const calcBottom = data => {
+      var totalNum = 0;
+      var totalPrice = 0;
+      for (var i = 0; i < data.length; i++) {
+        const checkbox = document.getElementById("checkbox" + data[i].id);
+        if (checkbox.checked) {
+          totalPrice += Number(
+            document.getElementById("tr_price" + data[i].id).innerHTML
+          );
+          totalNum += Number(
+            document.getElementById("proNum_p" + data[i].id).innerHTML
+          );
+        }
+      }
+      // 更新底部总价和总数
+      document.getElementById("totalNum").innerHTML = totalNum;
+      document.getElementById("totalPrice").innerHTML = totalPrice;
+    };
+
+    // 加入加减按钮
+    const addButtons = data => {
+      for (var i = 0; i < data.length; i++) {
+        var proNum = document.getElementById("proNum" + data[i].id);
+        var add = document.createElement("button");
+        var reduce = document.createElement("button");
+        var num = document.createElement("span");
+        add.innerHTML = "+";
+        reduce.innerHTML = "-";
+        num.innerHTML = data[i].count;
+        add.setAttribute("id", "add" + data[i].id);
+        add.setAttribute("class", "add");
+        num.setAttribute("id", "proNum_p" + data[i].id);
+        reduce.setAttribute("class", "reduce");
+        reduce.setAttribute("id", "reduce" + data[i].id);
+        proNum.appendChild(add);
+        proNum.appendChild(num);
+        proNum.appendChild(reduce);
+      }
+    };
+
+    const init = data => {
+      renderData(data);
+      addButtons(data);
+      calcBottom(data);
+      calc(data);
+    };
+
+    const calc = data => {
+      const chooseAll = document.getElementById("chooseAll");
+      // 全选按钮
+      chooseAll.addEventListener("click", () => {
+        const checkLen = document.querySelectorAll("input");
+        if (chooseAll.checked) {
+          for (var i = 0; i < checkLen.length; i++) {
+            checkLen[i].checked = true;
+          }
+        }
+        calcBottom(data);
+      });
+
+      for (var i = 0; i < data.length; i++) {
+        const proNum_p = document.getElementById("proNum_p" + data[i].id);
+        const proPrice = document.getElementById("proPrice" + data[i].id);
+        const checkbox = document.getElementById("checkbox" + data[i].id);
+        const tr_price = document.getElementById("tr_price" + data[i].id);
+        const row = document.getElementById(data[i].id);
+        const add = document.getElementById("add" + data[i].id);
+        const reduce = document.getElementById("reduce" + data[i].id);
+        // 每行前面checkbox按钮
+        checkbox.addEventListener("click", () => {
+          if (!checkbox.checked) {
+            calcBottom(data);
+            document.getElementById("chooseAll").checked = false;
+          } else {
+            calcBottom(data);
+          }
+        });
+        // 加
+        add.addEventListener("click", () => {
+          proNum_p.innerHTML = Number(proNum_p.innerHTML) + 1;
+          tr_price.innerHTML =
+            Number(proNum_p.innerHTML) * Number(proPrice.innerHTML);
+          if (checkbox.checked) {
+            calcBottom(data);
+          }
+        });
+        // 减
+        reduce.addEventListener("click", () => {
+          if (Number(proNum_p.innerHTML) > 0) {
+            proNum_p.innerHTML = Number(proNum_p.innerHTML) - 1;
+            tr_price.innerHTML =
+            Number(proNum_p.innerHTML) * Number(proPrice.innerHTML);
+            if (checkbox.checked) {
+              calcBottom(data);
+            }
+          } else {
+            row.setAttribute("style", "display: none");
+          }
+        });
+      }
+    };
+
+    init(data);
+  </script>
+</html>
