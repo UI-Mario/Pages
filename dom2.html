@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    <table border="1" cellspacing="0">
+    <table border="1" cellspacing="0" cellpadding="0">
       <tr>
         <th>选择</th>
         <th>商品名称</th>
@@ -83,6 +83,7 @@
       // 搭起表单框架
       const row = document.createElement("tr");
       row.setAttribute("id", id);
+      const checkboxTd = document.createElement("td");
       const checkbox = document.createElement("input");
       checkbox.setAttribute("type", "checkbox");
       checkbox.setAttribute("checked", "true");
@@ -97,7 +98,9 @@
       proNum.setAttribute("id", "proNum" + id);
       tr_price.setAttribute("id", "tr_price" + id);
 
-      row.appendChild(checkbox);
+
+      row.appendChild(checkboxTd);
+      checkboxTd.appendChild(checkbox);
       row.appendChild(proName);
       row.appendChild(proPrice);
       row.appendChild(proNum);
@@ -122,8 +125,6 @@
           data[i].name;
         document.getElementById("proPrice" + data[i].id).innerHTML =
           data[i].price;
-        // document.getElementById("proNum" + data[i].id).innerHTML =
-        data[i].count;
         document.getElementById("tr_price" + data[i].id).innerHTML =
           data[i].price * data[i].count;
       }
@@ -221,7 +222,7 @@
           if (Number(proNum_p.innerHTML) > 0) {
             proNum_p.innerHTML = Number(proNum_p.innerHTML) - 1;
             tr_price.innerHTML =
-            Number(proNum_p.innerHTML) * Number(proPrice.innerHTML);
+              Number(proNum_p.innerHTML) * Number(proPrice.innerHTML);
             if (checkbox.checked) {
               calcBottom(data);
             }
