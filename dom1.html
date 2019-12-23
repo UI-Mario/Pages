@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>dom1</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        width: 100%;
+        height: 100%;
+      }
+
+      .big-box {
+        position: relative;
+        width: 1000px;
+        height: 800px;
+        margin: 50px auto;
+        background-color: rgb(226, 220, 220);
+      }
+
+      .green-box {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 80px;
+        height: 80px;
+        background-color: rgb(27, 182, 35);
+      }
+
+      .yellow-box {
+        position: absolute;
+        right: 100px;
+        bottom: 100px;
+        width: 80px;
+        height: 80px;
+        background-color: rgb(233, 211, 15);
+      }
+    </style>
+  </head>
+  <body>
+    <div>1.</div>
+    <input placeholder="username" type="text" id="userName" />
+    <input placeholder="password" type="text" id="password" />
+    <button id="submit" onclick="isRightPassword()">submit</button>
+    <div>2.</div>
+    <div class="big-box">
+      <div class="yellow-box"></div>
+      <div class="green-box"></div>
+    </div>
+  </body>
+
+  <script>
+    function isRightPassword() {
+      var passWord = document.getElementById("password");
+      var userName = document.getElementById("userName");
+      if (passWord.value !== "123" || userName.value !== "123") {
+        passWord.value = "";
+        userName.value = "";
+        alert("Username or Password is wrong");
+      } else {
+        alert("Login successfully");
+      }
+    }
+    var greenBox = document.querySelector(".green-box");
+    var yellowBox = document.querySelector(".yellow-box");
+    var document = document.querySelector(".big-box");
+    var flag = false;
+    var x = 0;
+    var y = 0;
+    document.addEventListener("mousemove", move);
+
+    greenBox.addEventListener("mousedown", function(e) {
+      flag = true;
+      x = e.pageX - greenBox.offsetLeft;
+      y = e.pageY - greenBox.offsetTop;
+    });
+
+    document.addEventListener("mouseup", function() {
+      flag = false;
+    });
+
+    function move(e) {
+      if (flag) {
+        if (e.pageX - x < 0) {
+          greenBox.style.left = "0px";
+          if (e.pageY - y < 0) {
+            greenBox.style.top = "0px";
+          } else if (e.pageY - y > 720) {
+            greenBox.style.top = "720px";
+          } else {
+            greenBox.style.top = e.pageY - y + "px";
+          }
+        } else if (e.pageX - x > 920) {
+          greenBox.style.left = "920px";
+          if (e.pageY - y < 0) {
+            greenBox.style.top = "0px";
+          } else if (e.pageY - y > 720) {
+            greenBox.style.top = "720px";
+          } else {
+            greenBox.style.top = e.pageY - y + "px";
+          }
+        } else if (e.pageY - y < 0) {
+          greenBox.style.top = "0px";
+          if (e.pageX - x < 0) {
+            greenBox.style.left = "0px";
+          } else if (e.pageX - x > 920) {
+            greenBox.style.left = "920px";
+          } else {
+            greenBox.style.left = e.pageX - x + "px";
+          }
+        } else if (e.pageY - y > 720) {
+          greenBox.style.top = "720px";
+          if (e.pageX - x < 0) {
+            greenBox.style.left = "0px";
+          } else if (e.pageX - x > 920) {
+            greenBox.style.left = "920px";
+          } else {
+            greenBox.style.left = e.pageX - x + "px";
+          }
+        } else {
+          greenBox.style.left = e.pageX - x + "px";
+          greenBox.style.top = e.pageY - y + "px";
+          if (
+            e.pageX - x > 740 &&
+            e.pageX - x < 900 &&
+            e.pageY - y > 540 &&
+            e.pageY - y < 700
+          ) {
+            yellowBox.style.backgroundColor = "blue";
+          } else {
+            yellowBox.style.backgroundColor = "yellow";
+          }
+        }
+      }
+    }
+  </script>
+</html>
