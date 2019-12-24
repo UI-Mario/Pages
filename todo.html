@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>todo</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+      }
+
+      .form {
+        margin-top: 100px;
+        padding: 10px;
+        border: 1px solid black;
+        position: relative;
+      }
+
+      .add {
+        color: white;
+        margin-left: 5px;
+        background-color: #f45a8d;
+        border: 2px solid #f45a8d;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .bottom {
+        float: right;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+      }
+
+      .bottom span {
+        color: #f45a8d;
+        cursor: pointer;
+        margin: 5px;
+      }
+
+      .bottom span:hover {
+        background-color: antiquewhite;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="form">
+      <p><strong>To Do List</strong></p>
+      <p>simple ToDo List with adding and filter by diff status</p>
+      <div>
+        <input id="input" /><button class="add" onclick="add()">
+          Add
+        </button>
+      </div>
+      <ol id="show"></ol>
+      <div class="bottom">
+        <span id="all">All</span>
+        <span id="active">Active</span>
+        <span id="complete">Complete</span>
+      </div>
+    </div>
+  </body>
+  <script>
+    const renderData = flag => {
+      if (localStorage.length) {
+        for (var i = 0; i < localStorage.length; i++) {
+          var item = JSON.parse(localStorage[i]);
+          if (flag === "all") {
+            createList_str(item);
+          }
+          if (flag === "active") {
+            if (item.checked === "!checked") {
+              createList_str(item);
+            }
+          }
+          if (flag === "complete") {
+            if (item.checked === "checked") {
+              createList_str(item);
+            }
+          }
+        }
+      }
+    };
+
+    const createList_str = data => {
+      var str = ``;
+      str += `<li id="${data.id}">
+                <input type="checkbox" ${data.checked} id="checkbox${data.id}"/>
+                <span>${data.content}</span>
+              </li>`;
+      document.getElementById("show").innerHTML += str;
+    };
+
+    const add = () => {
+      if (document.getElementById("input").value) {
+        let dataSource = {};
+        dataSource.content = document.getElementById("input").value;
+        dataSource.checked = "!checked";
+        dataSource.id = window.localStorage.length;
+        window.localStorage.setItem(dataSource.id, JSON.stringify(dataSource));
+        createList_str(dataSource);
+        document.getElementById("input").value = null;
+      } else {
+        alert("Please input value");
+      }
+    };
+
+    const clickEvent = () => {
+      var form = document.getElementsByClassName("form")[0];
+      form.onclick = function(event) {
+        var target = event.target;
+        if (target.type === "checkbox") {
+          let dataSource = JSON.parse(localStorage[target.parentElement.id]);
+          if (JSON.parse(localStorage[target.parentElement.id]).checked === "!checked") {
+            target.parentElement.setAttribute("style", "text-decoration: line-through");
+            dataSource.checked = "checked";
+          } else {
+            target.parentElement.setAttribute("style", "none");
+            dataSource.checked = "!checked";
+          }
+          window.localStorage.setItem(dataSource.id, JSON.stringify(dataSource));
+        }
+        if (target.id === "active") {
+          document.getElementById("show").innerHTML = "";
+          renderData("active");
+        }
+        if (target.id === "complete") {
+          document.getElementById("show").innerHTML = "";
+          renderData("complete");
+        }
+        if (target.id === "all") {
+          document.getElementById("show").innerHTML = "";
+          renderData("all");
+        }
+      };
+    };
+
+    window.onload = () => {
+      renderData("all");
+      clickEvent();
+    };
+  </script>
+</html>
