@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <title>ProList</title>
+  <link rel="stylesheet" type="text/css" href="./index.css">
+  <script src="./iconfont/iconfont.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="index.js"></script>
+</head>
+<body>
+  <div class="alertbox">
+    <span class="iconfont close-icon">&#xe600</span>
+    <div>
+      <span class="iconfont prompt-icon">&#xe60a</span>
+      <span class="remand1">提示</span>
+    </div>
+    <p class="remand2">确认删除该项目吗？</p>
+    <div class="alert-bottom">
+      <button id=cancel class="test">取消</button>
+      <button id="confirm">确认</button>
+    </div>
+  </div>
+  <div class="canvas"></div>
+  <div id="menu">
+    <div class="menu-card" id="menu-all">
+      <span class="menu-card-title">所有任务</span>
+      <span class="menu-real-time">实时</span>
+      <br>
+      <span class="menu-card-count" id="all-count">11</span>
+      <span class="iconfont story-icon">&#xe60c</span>
+    </div>
+    <div class="menu-card" id="menu-pending">
+      <span class="menu-card-title">未解决</span>
+      <span class="menu-real-time">实时</span>
+      <br>
+      <span class="menu-card-count" id="pending-count">1</span>
+      <span class="menu-card-percent" id="pending-percent">10%</span>
+      <span class="iconfont story-icon">&#xe651</span>
+    </div>
+    <div class="menu-card" id="menu-active">
+      <span class="menu-card-title">处理中</span>
+      <span class="menu-real-time">实时</span>
+      <br>
+      <span class="menu-card-count" id="active-count"></span>
+      <span class="menu-card-percent" id="active-percent"></span>
+      <span class="iconfont story-icon">&#xe615</span>
+    </div>
+    <div class="menu-card" id="menu-finished">
+      <span class="menu-card-title">已解决</span>
+      <span class="menu-real-time">实时</span>
+      <br>
+      <span class="menu-card-count" id="finished-count"></span>
+      <span class="menu-card-percent" id="finished-percent"></span>
+      <span class="iconfont story-icon">&#xe614</span>
+    </div>
+  </div>
+
+  <div id="pro-list">
+    <h1>项目列表</h1>
+    <table id="pro-table">
+      <tr>
+        <th class="pro-name">项目名称</th>
+        <th class="pro-des"><p>项目描述</p></th>
+        <th class="pro-endtime">截止时间</th>
+        <th class="pro-status">状态</th>
+        <th class="pro-operate">操作</th>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
