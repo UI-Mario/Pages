@@ -1,111 +1,136 @@
 function bestCharge(selectedItems) {
-    let shoppingList = getAllItems(selectedItems);
-    let summary = hasDiscount(shoppingList);
-    let result = printAllItems(shoppingList, summary);
-    return result;
-}
-
-function getAllItems(selectedItems) {
-    const allItems = loadAllItems();
-    const [selectedItemsID, selectedItemsCount] = getItemsIdAndCount(selectedItems);
-    const shoppingList = selectedItemsID.map(
-        (selectedItem, index) => {
-            const findItem = allItems.find(item => item.id === selectedItem);
-            findItem.count = selectedItemsCount[index];
-            findItem.subTotal = findItem.price * findItem.count;
-            return findItem;
-        })
-    return shoppingList;
-}
-
-
-function getItemsIdAndCount(selectedItems) {
-    const selectedItemsID = selectedItems.map(item => item.split(' x ')[0]);
-    const selectedItemsCount = selectedItems.map(item => item.split(' x ')[1]);
-    return [selectedItemsID, selectedItemsCount];
-}
-
-function hasDiscount(shoppingList) {
-    let summary = {};
-    let totalPrice = getTotalPrice(shoppingList);
-    summary.totalPrice = totalPrice;
-    summary = hasDiscountTypeOne(totalPrice, summary);
-    summary = hasDiscountTypeTwo(shoppingList, summary, totalPrice);
-    return summary;
-}
-
-function getTotalPrice(shoppingList) {
-    let totalPrice = shoppingList.reduce(
-        (prev, cur) => {
-            return prev + cur.subTotal;
-        }, 0);
-    return totalPrice;
-}
-
-function hasDiscountTypeOne(totalPrice, summary) {
-    if (totalPrice >= 30) {
-        discountTypeOneTodo(summary, totalPrice);
+  let getSelectedInfo = selectedItems => {
+    let selectedId = [];
+    for (let i in selectedItems) {
+      selectedId.push(selectedItems[i].slice(0, 8));
     }
-    return summary;
-}
-
-function discountTypeOneTodo(summary, totalPrice) {
-    summary.hasDiscounted = 1;
-    summary.totalPrice = totalPrice - 6;
-    summary.discountPrice = 6;
-}
-
-function hasDiscountTypeTwo(shoppingList, summary, totalPrice) {
-    let [totalPriceDiscounted, discountedItems] = discountTypeTwoTotalPrice(shoppingList);
-    if (summary.hasDiscounted) {
-        if (totalPriceDiscounted < summary.totalPrice) {
-            discountTypeTwoTodo(summary, totalPriceDiscounted, totalPrice, discountedItems);
-        }
-    } else {
-        if (totalPriceDiscounted !== totalPrice) {
-            discountTypeTwoTodo(summary, totalPriceDiscounted, totalPrice, discountedItems);
-        }
+  
+    let selectedObj = idToItems(selectedId);
+    for (let i in selectedObj) {
+      let itemsArr = selectedItems[i].split(' ');
+      let count = Number(itemsArr[itemsArr.length - 1]);
+      selectedObj[i].count = count;
+      selectedObj[i].id = selectedId[i];
     }
-    return summary;
-}
-
-function discountTypeTwoTotalPrice(shoppingList) {
-    const discountItems = loadPromotions()[1].items;
-    let discountedItems = [];
-    let shoppingListDiscounted = JSON.parse(JSON.stringify(shoppingList));
-    shoppingListDiscounted.forEach(item => {
-        if (discountItems.indexOf(item.id) !== -1) {
-            item.subTotal *= 0.5;
-            discountedItems.push(item.name);
+    return selectedObj;
+  }
+  
+  let idToItems = arr => {
+    let items = loadAllItems();
+    let idToItems = [];
+    for (let i in arr) {
+      for (let j in items) {
+        if (arr[i] === items[j].id) {
+          let item = {};
+          item.name = items[j].name;
+          item.price = items[j].price;
+          idToItems.push(item);
         }
-    });
-    let totalPriceDiscounted = getTotalPrice(shoppingListDiscounted);
-    return [totalPriceDiscounted, discountedItems];
-}
-
-function discountTypeTwoTodo(summary, totalPriceDiscounted, totalPrice, discountedItems) {
-    summary.totalPrice = totalPriceDiscounted;
-    summary.hasDiscounted = 2;
-    summary.discountPrice = totalPrice - totalPriceDiscounted;
-    summary.discountedItems = discountedItems;
-}
-
-function printAllItems(shoppingList, summary) {
-    let result = `============= 订餐明细 =============\n`;
-    shoppingList.forEach(
-        item => {
-            return result += `${item.name} x ${item.count} = ${item.subTotal}元\n`
-        }
-    );
-    result += `-----------------------------------\n`;
-    switch (summary.hasDiscounted) {
-        case 1:
-            result += `使用优惠:\n满30减6元，省6元\n-----------------------------------\n`;
-            break;
-        case 2:
-            result += `使用优惠:\n指定菜品半价(${summary.discountedItems.join('，')})，省${summary.discountPrice}元\n-----------------------------------\n`;
-            break;
+      }
     }
-    result += `总计：${summary.totalPrice}元\n===================================`;
-    return result;
+    return idToItems;
+  }
+  
+  let selectedObj = getSelectedInfo(selectedItems);
+
+  let sum = 0;
+
+  for (let i in selectedObj) {
+    sum += selectedObj[i].price * selectedObj[i].count;
+  }
+
+  let thirtyMinusSix = sum => {
+    let sumActuall;
+    if(sum >= 30) {
+      sumActuall = sum - 6;
+    }
+    if (sum < 30) {
+      sumActuall = sum;
+    }
+    return sumActuall;
+  }
+
+  let halfPrice = selectedObj => {
+    let sumActuall = 0;
+    let promotions = loadPromotions();
+    for (let i in selectedObj) {
+      sumActuall += selectedObj[i].price * selectedObj[i].count;
+      for (let j in promotions[1].items) {
+        if (selectedObj[i].id === promotions[1].items[j]) {
+          sumActuall -= (selectedObj[i].price * selectedObj[i].count)/2;
+        }
+      }
+    }
+    return sumActuall;
+  }
+  
+  let whichMeans = (sum, selectedObj) => {
+    let methodOne = thirtyMinusSix(sum);
+    let methodTwo = halfPrice(selectedObj);
+    let method;
+    if (methodOne <= methodTwo && methodOne !==sum) {
+      method = 1;
+    }
+    if (methodOne > methodTwo && methodTwo !==sum) {
+      method = 2;
+    }
+    if (methodOne === sum && methodTwo === sum && sum !== 0) {
+      method = 3;
+    }
+
+    return method;
+  }
+ 
+  let showContent = (selectedObj) => {
+    let contentTotalPrice = (selectedObj, content) => {
+      if (selectedObj.length !== 0) {
+        for (let i in selectedItems) {
+          content += `
+${selectedObj[i].name} x ${selectedObj[i].count} = ${selectedObj[i].price * selectedObj[i].count}元`;
+        }
+        content += `
+-----------------------------------`;
+      }
+      return content;
+    }
+  
+    let showPromotionMeans = (means, content) => {
+      if (means === 1) {
+        content += `
+使用优惠:
+满30减6元，省6元
+-----------------------------------
+总计：${thirtyMinusSix(sum)}元
+===================================`;
+      }
+    
+      if (means === 2) {
+        content += `
+使用优惠:
+指定菜品半价(黄焖鸡，凉皮)，省${sum - halfPrice(selectedObj)}元
+-----------------------------------
+总计：${halfPrice(selectedObj)}元
+===================================`;
+      }
+    
+      if (means === 3) {
+        content += `
+总计：${sum}元
+===================================`;
+      }
+    
+      return content;
+    }
+
+    let content = `
+============= 订餐明细 =============`;
+
+    content = contentTotalPrice(selectedObj, content);
+
+    let means = whichMeans(sum, selectedObj);
+    content = showPromotionMeans (means, content);
+    return content;
+  }
+
+  return showContent(selectedObj);
 }
