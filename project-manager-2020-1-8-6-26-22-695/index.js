@@ -16,9 +16,9 @@ const renderList = data => {
   data.map(item => {
     addList(item)
   })
-  const up = document.getElementById('up')
+  // const up = document.getElementById('up')
   // const down = document.getElementById('down')
-  up.setAttribute('style', 'color: #3080EF')
+  // up.setAttribute('style', 'color: #3080EF')
   // down.setAttribute('style', 'color: none')
 }
 
