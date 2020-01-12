@@ -1,20 +1,6 @@
 {
   "projects": [
     {
-      "id": 1,
-      "name": "react-native",
-      "endTime": "2018-12-01",
-      "description": "这个是 Facebook 在 React.js Conf 2015 大会上推出的基于 JavaScript 的开源框架 React Native, 该框架结合了 Web 应用和 Native 应用的优势, 可以使用 JavaScript 来开发 iOS 和 Android 原生应用",
-      "status": "ACTIVE"
-    },
-    {
-      "id": 2,
-      "name": "Android-Universal-Image-Loader",
-      "endTime": "2018-12-02",
-      "description": "ImageLoader 是最早开源的 Android 图片缓存库, 强大的缓存机制, 早期被广泛 Android 应用使用, 至今仍然有很多 Android 开发者在使用",
-      "status": "ACTIVE"
-    },
-    {
       "id": 3,
       "name": "RxJava",
       "endTime": "2018-12-03",
@@ -34,13 +20,6 @@
       "endTime": "2018-12-05",
       "description": "OkHttp 是 Square 公司出品的 HTTP 另一个请求库, Google 不推荐人们使用 HttpClient, 可是 HttpURLConnection 实在是太难用了, 因此很多人使用了 OkHttp 来解决这问题, 据说 Android4.4 的源码中可以看到 HttpURLConnection 已经替换成 OkHttp 实现呢",
       "status": "ACTIVE"
-    },
-    {
-      "id": 6,
-      "name": "picasso",
-      "endTime": "2018-12-06",
-      "description": "Picasso 是 Square 公司出品的一款图片缓存库, 主导者是 JakeWharton 大神",
-      "status": "CLOSED"
     },
     {
       "id": 7,
@@ -125,13 +104,6 @@
       "endTime": "2018-12-18",
       "description": "作者 Matej Bukovinski 是一位全栈工程师， UI/UX 设计师， 此项目是一款提示框第三方库， 帮助开发者快速应用到项目中)",
       "status": "PENDING"
-    },
-    {
-      "id": 19,
-      "name": "MagicalRecord",
-      "endTime": "2018-12-19",
-      "description": "作者是 Coursera 的 iOS 工程师， 该项目创作灵感来自于 Ruby on Rails 的 Active Record, 主要为方便操作 CoreData 而生， 帮助清除 CoreData 引用的代码， 协助方便 CoreData 的工作",
-      "status": "CLOSED"
     },
     {
       "id": 20,

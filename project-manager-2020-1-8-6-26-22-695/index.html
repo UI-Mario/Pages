@@ -55,13 +55,23 @@
     </div>
   </div>
 
+  <div id="search" class="search">
+    <input id="search-box-id" class="search-box" placeholder="输入项目名中的关键词进行搜索">
+    <div class="search-btn">
+      <span id="search-img" class="iconfont">&#xe652</span>
+    </div>
+  </div>
   <div id="pro-list">
     <h1>项目列表</h1>
     <table id="pro-table">
       <tr>
         <th class="pro-name">项目名称</th>
         <th class="pro-des"><p>项目描述</p></th>
-        <th class="pro-endtime">截止时间</th>
+        <th class="pro-endtime">
+          <span>截止时间</span>
+          <span class="iconfont" id="up" onclick="sotrUpClick()">&#xe645</span>
+          <span class="iconfont" id="down" onclick="sotrDownClick()">&#xe62a</span>
+        </th>
         <th class="pro-status">状态</th>
         <th class="pro-operate">操作</th>
       </tr>

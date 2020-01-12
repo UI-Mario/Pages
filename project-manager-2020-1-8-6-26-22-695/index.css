@@ -261,3 +261,39 @@ table button {
   color: #fff;
 }
 
+#up,
+#down {
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.highlight {
+  color: #3080FE;
+}
+
+.search {
+  float: right;
+  display: flex;
+  align-items: center;
+}
+
+.search-box {
+  width: 200px;
+  height: 32px;
+  padding: 0 38px 0 12px;
+  border-radius: 20px;
+  border: solid 1px #eee;
+  outline: none;
+}
+
+.search-btn {
+  position: relative;
+  left: -30px;
+  cursor: pointer;
+  /* background-color: #31b48d; */
+}
+
+.search-img {
+  font-size: 20px;
+  color: #aaa;
+}
