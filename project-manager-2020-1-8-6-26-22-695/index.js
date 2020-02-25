@@ -16,10 +16,6 @@ const renderList = data => {
   data.map(item => {
     addList(item)
   })
-  // const up = document.getElementById('up')
-  // const down = document.getElementById('down')
-  // up.setAttribute('style', 'color: #3080EF')
-  // down.setAttribute('style', 'color: none')
 }
 
 const renderCard = data => {
@@ -58,6 +54,12 @@ const mouseEvent = () => {
       callAlertBox()
       temp = target.id.slice(6)
     }
+    if (target.id === 'up') {
+      sotrUpClick()
+    }
+    if (target.id === 'down') {
+      sotrDownClick()
+    }
   }
   table.onmouseover = event => {
     const target = event.target
@@ -84,7 +86,6 @@ const mouseEvent = () => {
       offAlertBox()
     }
   }
-
   const search = document.getElementById('search')
   search.onclick = event => {
     const target = event.target
@@ -115,6 +116,7 @@ const searchData = (str, data) => {
 
 const sotrUpClick = () => {
   console.log('yes')
+  let data = document.getElementsByClassName('name')
   axios.get('http://localhost:3000/projects').then(
     response => {
       clearNode()
@@ -124,7 +126,7 @@ const sotrUpClick = () => {
       const up = document.getElementById('up')
       const down = document.getElementById('down')
       up.setAttribute('style', 'color: #3080EF')
-      down.setAttribute('style', 'color: none')
+      down.setAttribute('style', 'color: #333333')
     },
     response => {
       console.log('error')
@@ -144,7 +146,7 @@ const sotrDownClick = () => {
       renderList(tempData)
       const up = document.getElementById('up')
       const down = document.getElementById('down')
-      up.setAttribute('style', 'color: none')
+      up.setAttribute('style', 'color: #333333')
       down.setAttribute('style', 'color: #3080EF')
     },
     response => {
@@ -186,8 +188,8 @@ const clearNode = () => {
   <th class="pro-des"><p>项目描述</p></th>
   <th class="pro-endtime">
     <span>截止时间</span>
-    <span class="iconfont" id="up" onclick="sotrUpClick()">&#xe645</span>
-    <span class="iconfont" id="down" onclick="sotrDownClick()">&#xe62a</span>
+    <span class="iconfont" id="up">&#xe645</span>
+    <span class="iconfont" id="down">&#xe62a</span>
   </th>
   <th class="pro-status">状态</th>
   <th class="pro-operate">操作</th>
