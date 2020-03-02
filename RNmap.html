@@ -39,7 +39,8 @@
     <div id="container"></div>
     <script>
       var map = new AMap.Map('container', {
-        resizeEnable: true
+        resizeEnable: true,
+        center: [114.359381429, 30.5285286208],
       })
       map.plugin(['AMap.Scale'], function() {
         var scale = new AMap.Scale()
