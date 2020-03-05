@@ -1,0 +1,67 @@
+{
+  "data": {
+    "pf": {
+      "name": "牌坊",
+      "location": {
+        "latitude": 114.3579447269,
+        "longitude": 30.5332435585
+      }
+    },
+    "yhcb": {
+      "name": "樱花城堡",
+      "location": {
+        "latitude": 114.3638241291,
+        "longitude": 30.5396197200
+      }
+    },
+    "yal": {
+      "name": "遥感楼",
+      "location": {
+        "latitude": 114.3602085114,
+        "longitude": 30.5258550045
+      }
+    },
+    "xbtsg": {
+      "name": "信息学部图书馆",
+      "location": {
+        "latitude": 114.3612343700,
+        "longitude": 30.5290302200
+      }
+    },
+    "wl": {
+      "name": "万林博物馆",
+      "location": {
+        "latitude": 114.3630718800,
+        "longitude": 30.5365678700
+      }
+    },
+    "lbm": {
+      "name": "凌波门栈道",
+      "location": {
+        "latitude": 114.3713207400,
+        "longitude": 30.5433237900
+      }
+    },
+    "ljgc": {
+      "name": "珞珈广场",
+      "location": {
+        "latitude": 114.3610627100,
+        "longitude": 30.5347875100
+      }
+    },
+    "lyjnt": {
+      "name": "六一纪念亭",
+      "location": {
+        "latitude": 114.3613932900,
+        "longitude": 30.5369454300
+      }
+    },
+    "sqtyg": {
+      "name": "宋卿体育馆",
+      "location": {
+        "latitude": 114.3618546300,
+        "longitude": 30.5383038100
+      }
+    }
+  }
+}
