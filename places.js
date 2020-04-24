@@ -118,15 +118,15 @@ function staticLoadPlaces() {
         {
             name: 'place1',
             location: {
-                lat: 31.3801439500,
-                lng: 106.5503334800,
+                lat: 31.3601439500,
+                lng: 106.5703334800,
             }
         },
         {
             name: 'place2',
             location: {
-                lat: 31.3804553800,
-                lng: 106.5488314400,
+                lat: 31.3904553800,
+                lng: 106.5188314400,
             }
         }
     ];
