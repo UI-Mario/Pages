@@ -75,10 +75,10 @@
 
 
 window.onload = () => {
-    let method = 'dynamic';
+    let method = 'static';
 
     // if you want to statically add places, de-comment following line
-    method = 'static';
+    // method = 'static';
 
     if (method === 'static') {
         let places = staticLoadPlaces();
