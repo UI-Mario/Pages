@@ -35,15 +35,15 @@ function staticLoadPlaces() {
         {
             name: "Your place name",
             location: {
-                lat: 106.5507840900, // add here latitude if using static data
-                lng: 31.3775792400, // add here longitude if using static data
+                lat: 31.3800294600,// add here latitude if using static data
+                lng: 106.5494108000, // add here longitude if using static data
             }
         },
         {
             name: 'Another place name',
             location: {
-                lat: 106.5570866100,
-                lng: 31.3780920000,
+                lat: 31.3780920000,
+                lng: 106.5570866100,
             }
         }
     ];
