@@ -33,8 +33,8 @@ function staticLoadPlaces() {
         {
             name: "Your place name",
             location: {
-                lat: 31.3800340400, // change here latitude if using static data
-                lng: 106.5493893400, // change here longitude if using static data
+                lat: 31.3814629200,
+                lng: 106.5482306300, // change here longitude if using static data
             }
         },
     ];
@@ -83,7 +83,7 @@ function renderPlaces(places) {
         let text = document.createElement('a-link');
         text.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
         text.setAttribute('title', place.name);
-        text.setAttribute('href', 'http://www.example.com/');
+        text.setAttribute('href', 'https://www.baidu.com/');
         text.setAttribute('scale', '15 15 15');
 
         text.addEventListener('loaded', () => {
