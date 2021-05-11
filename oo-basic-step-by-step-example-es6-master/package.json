@@ -16,7 +16,7 @@
     "test": "mocha spec/**/*.js --require babel/register --require source-map-support/register"
   },
   "dependencies": {
-    "lodash": "3.9.3"
+    "lodash": "4.17.21"
   },
   "devDependencies": {
     "babel": "^5.8.23",
