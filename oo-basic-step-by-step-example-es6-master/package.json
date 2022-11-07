@@ -19,7 +19,7 @@
     "lodash": "3.9.3"
   },
   "devDependencies": {
-    "babel": "^5.8.23",
+    "babel": "^6.23.0",
     "mocha": "^4.0.1",
     "sinon": "^4.0.1",
     "chai": "^4.1.0",
